@@ -15,7 +15,7 @@ namespace :scrape do
   doc = Nokogiri::HTML.parse(html, nil, charset)
 
   doc.xpath('//dt[@class="yjnSub_list_head"]').each do |node|
-    puts node.text
+    puts node.inner_text
   end
   end
 end
