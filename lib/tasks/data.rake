@@ -1,6 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
-namespace :scrape do
+namespace :data do
   task :yahoo_title => :environment do
 
   URL = "https://news.yahoo.co.jp/"
@@ -15,7 +15,9 @@ namespace :scrape do
   doc = Nokogiri::HTML.parse(html, nil, charset)
 
   doc.xpath('//dt[@class="yjnSub_list_head"]').each do |node|
-    puts node.inner_text
+  product = node.inner_text
+  feed = Datum.new(:product  => product)
+  feed.save
   end
   end
 end
